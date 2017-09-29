@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-LIBS = libft/libft.a
+LIBS = -L libft/ -lft
 
 INCLUDES = ft_corewar.h op.h
 
@@ -31,7 +31,7 @@ SRC_1 =  main.c process_opcodes.c write_to_file.c labels_one.c labels_two.c \
 all: $(NAME_1)
 
 $(NAME_1):
-	$(MAKE) -C libft/ re
+	$(MAKE) -C libft/
 	$(CC) -o $(NAME_1) $(SRC_1) $(CFLAGS)  $(LIBS)
 	
 #$(NAME_2):
