@@ -6,7 +6,7 @@
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 20:40:17 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 12:30:25 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/10/01 17:30:49 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ typedef struct		s_arena
 
 typedef void		(*t_func)(t_arena **, t_champ **);
 
+t_champ				*destroy_dead_champ(t_arena **arena, int num);
+void				add_champ_to_last(t_arena **arena, t_champ *champ);
 void				arena_val(unsigned char *a, int s, int p, unsigned char *b);
 void				to_arena(t_arena **are, unsigned char *byte, int b, int pc);
 void				add_to_champs(t_champ **all_champs, t_champ *champ);
-void				create_fork_champ(t_champ *champ, t_arena **arena, int ind);
+t_champ				*create_fork_champ(t_champ *champ, t_arena **area, int ind);
 void				set_run(unsigned char op, t_champ **champ);
-void				run_cycles(t_arena **arena, t_func *f, int *count, int *cy);
+void				run(t_arena **arena, t_func *f, int *count, int *cy);
 void				fill_functions(t_func *f);
 void				destroy_arena(t_arena **arena);
 t_bool				get_options(int ac, char **av, char *err, t_arena **arena);

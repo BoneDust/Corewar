@@ -6,7 +6,7 @@
 /*   By: mmayibo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 12:26:02 by mmayibo           #+#    #+#             */
-/*   Updated: 2017/10/01 11:13:19 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/10/01 17:35:41 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int				main(int ac, char **av)
 	read_champs(&arena);
 	load_arena(&arena);
 	fill_functions(f);
-	run_cycles(&arena, f, &cycles_2d_counter, &cycles);
+	run(&arena, f, &cycles_2d_counter, &cycles);
 	if (cycles != arena->dump)
 		print_winner(arena);
 	destroy_arena(&arena);

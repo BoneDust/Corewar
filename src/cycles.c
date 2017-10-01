@@ -6,13 +6,13 @@
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 10:52:56 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 15:09:04 by nrarane          ###   ########.fr       */
+/*   Updated: 2017/10/01 17:52:38 by nrarane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
 
-static void	process_instruction(t_champ *champ, t_arena **arena, t_func *f)
+static void		process_instruction(t_champ *champ, t_arena **arena, t_func *f)
 {
 	unsigned char	op;
 
@@ -28,7 +28,7 @@ static void	process_instruction(t_champ *champ, t_arena **arena, t_func *f)
 	champ->pc %= MEM_SIZE;
 }
 
-void		fill_functions(t_func *f)
+void			fill_functions(t_func *f)
 {
 	f[0] = &ft_live;
 	f[1] = &ft_ld;
@@ -48,35 +48,19 @@ void		fill_functions(t_func *f)
 	f[15] = &ft_aff;
 }
 
-static void	remove_player(int cycles, t_champ **champ, t_arena **arena)
+static t_champ	*remove_player(int cycles, t_champ *champ, t_arena **arena)
 {
-	t_champ	*tmp;
-
-	tmp = (*arena)->champs;
-	if (ft_strequ(tmp->name, (*champ)->name))
-	{
-		ft_putstr("\nPlayer who died this cycle (");
-		ft_putnbr(cycles);
-		ft_putstr(") : ");
-		ft_putendl((*champ)->name);
-		(*arena)->champs = (*arena)->champs->next;
-		*champ = (*arena)->champs;
-		free(tmp);
-		return ;
-	}
-	while (tmp->next && !ft_strequ(tmp->next->name, (*champ)->name))
-		tmp = tmp->next;
 	ft_putstr("\nPlayer who died this cycle (");
 	ft_putnbr(cycles);
-	ft_putstr(") : ");
-	ft_putendl((*champ)->name);
-	tmp->next = (*champ)->next;
-	*champ = (*champ)->next;
-	tmp = tmp->next;
-	free(tmp);
+	ft_putstr(") : Player ");
+	ft_putnbr(champ->player_no);
+	ft_putstr(" (");
+	ft_putstr(champ->name);
+	ft_putendl(")");
+	return (destroy_dead_champ(arena, champ->player_no));
 }
 
-static int	check_alive(int cycles, t_arena **arena, int total_lives)
+static int		check_alive(int cycles, t_arena **arena, int total_lives)
 {
 	t_champ	*champ;
 
@@ -84,14 +68,11 @@ static int	check_alive(int cycles, t_arena **arena, int total_lives)
 	while (champ)
 	{
 		if (!champ->alive)
-			remove_player(cycles, &champ, arena);
+			champ = remove_player(cycles, champ, arena);
 		else
 		{
 			total_lives += champ->alive;
 			champ->alive = 0;
-			(*arena)->last_live = champ->player_no;
-			ft_memcpy((*arena)->winner, champ->name, PROG_NAME_LENGTH);
-			ft_memcpy((*arena)->winner_comment, champ->comment, COMMENT_LENGTH);
 			champ = champ->next;
 		}
 	}
@@ -104,7 +85,7 @@ static int	check_alive(int cycles, t_arena **arena, int total_lives)
 	return ((*arena)->champs && total_lives ? TRUE : FALSE);
 }
 
-void		run_cycles(t_arena **arena, t_func *f, int *c2d_counter, int *cycle)
+void			run(t_arena **arena, t_func *f, int *c2d_counter, int *cycle)
 {
 	t_champ *champ;
 	int		battle_continues;

@@ -6,13 +6,13 @@
 /*   By: akhanye <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 11:40:13 by akhanye           #+#    #+#             */
-/*   Updated: 2017/10/01 15:11:01 by nrarane          ###   ########.fr       */
+/*   Updated: 2017/10/01 17:55:35 by nrarane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
 
-int		bytes_to_int(unsigned char *bytes, int size)
+int			bytes_to_int(unsigned char *bytes, int size)
 {
 	int				num;
 	unsigned char	temp_num[4];
@@ -38,7 +38,7 @@ int		bytes_to_int(unsigned char *bytes, int size)
 	return (num);
 }
 
-void	verify_head(unsigned char *buf, t_champ **ch, t_arena **arena, int j)
+void		verify_head(unsigned char *buf, t_champ **ch, t_arena **ar, int j)
 {
 	int				i;
 	unsigned char	p_size[4];
@@ -49,7 +49,7 @@ void	verify_head(unsigned char *buf, t_champ **ch, t_arena **arena, int j)
 	if (buf[0] != 0x00 || buf[1] != 0xea || buf[2] != 0x83 || buf[3] != 0xf3)
 	{
 		free(*ch);
-		exit_prog("\nError : Champion contains invalid magic number.", arena);
+		exit_prog("\nError : Champion contains invalid magic number.", ar);
 	}
 	i = 4;
 	ft_memcpy((*ch)->name, buf + i, PROG_NAME_LENGTH);
@@ -60,14 +60,14 @@ void	verify_head(unsigned char *buf, t_champ **ch, t_arena **arena, int j)
 	if ((*ch)->player_size <= 0 || (*ch)->player_size > CHAMP_MAX_SIZE)
 	{
 		free(*ch);
-		join(err, "\nError : ", (*arena)->p_names[j]);
+		join(err, "\nError : ", (*ar)->p_names[j]);
 		ft_strcat(err, " size is zero or too large.");
-		exit_prog(err, arena);
+		exit_prog(err, ar);
 	}
 	ft_memcpy((void*)(*ch)->comment, (const void*)(buf + i), COMMENT_LENGTH);
 }
 
-t_champ	*create_champ(t_arena **arena, int i, unsigned char *head, int bytes)
+t_champ		*create_champ(t_arena **ar, int i, unsigned char *head, int bytes)
 {
 	t_champ			*champ;
 	int				index;
@@ -75,7 +75,7 @@ t_champ	*create_champ(t_arena **arena, int i, unsigned char *head, int bytes)
 	index = 0;
 	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
 		return (NULL);
-	verify_head(head, &champ, arena, i);
+	verify_head(head, &champ, ar, i);
 	champ->reg[0] = i + 1;
 	champ->player_no = champ->reg[0];
 	champ->alive = 0;
@@ -87,15 +87,12 @@ t_champ	*create_champ(t_arena **arena, int i, unsigned char *head, int bytes)
 	while (++index < REG_NUMBER)
 		champ->reg[index] = 0;
 	ft_bzero((void*)champ->prog, CHAMP_MAX_SIZE);
-	if ((bytes = read((*arena)->fd[i], champ->prog, champ->player_size)) < 0)
-	{
-		free(champ);
-		exit_prog("\nError : Failed to read champion data.", arena);
-	}
+	if ((bytes = read((*ar)->fd[i], champ->prog, champ->player_size)) < 0)
+		exit_prog("\nError : Failed to read champion data.", ar);
 	return (champ);
 }
 
-void	add_to_champs(t_champ **champs, t_champ *champ)
+void		add_to_champs(t_champ **champs, t_champ *champ)
 {
 	if (!*champs)
 		*champs = champ;
@@ -106,7 +103,7 @@ void	add_to_champs(t_champ **champs, t_champ *champ)
 	}
 }
 
-void	read_champs(t_arena **arena)
+void		read_champs(t_arena **arena)
 {
 	int				i;
 	int				r;
