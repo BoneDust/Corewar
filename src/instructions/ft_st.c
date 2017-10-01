@@ -6,7 +6,7 @@
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 20:13:53 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 13:39:44 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:14:51 by nrarane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_st(t_arena **arena, t_champ **champ)
 	decode(3, (*arena)->arena[pc], sizes);
 	pc = (pc + 1) % MEM_SIZE;
 	value[0] = (*champ)->reg[get_a_value(sizes[0], pc, (*arena)->arena) - 1];
-	pc  = (pc + sizes[0]) % MEM_SIZE;
+	pc = (pc + sizes[0]) % MEM_SIZE;
 	value[1] = get_a_value(sizes[1], pc, (*arena)->arena);
 	if (sizes[1] == 1)
 		(*champ)->reg[value[1] - 1] = value[0];

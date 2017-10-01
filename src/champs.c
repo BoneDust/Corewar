@@ -6,13 +6,13 @@
 /*   By: akhanye <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 11:40:13 by akhanye           #+#    #+#             */
-/*   Updated: 2017/10/01 13:28:04 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:11:01 by nrarane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../vm.h"
 
-int			bytes_to_int(unsigned char *bytes, int size)
+int		bytes_to_int(unsigned char *bytes, int size)
 {
 	int				num;
 	unsigned char	temp_num[4];
@@ -38,7 +38,7 @@ int			bytes_to_int(unsigned char *bytes, int size)
 	return (num);
 }
 
-void		verify_head(unsigned char *buf, t_champ **ch, t_arena **arena, int j)
+void	verify_head(unsigned char *buf, t_champ **ch, t_arena **arena, int j)
 {
 	int				i;
 	unsigned char	p_size[4];
@@ -67,7 +67,7 @@ void		verify_head(unsigned char *buf, t_champ **ch, t_arena **arena, int j)
 	ft_memcpy((void*)(*ch)->comment, (const void*)(buf + i), COMMENT_LENGTH);
 }
 
-t_champ		*create_champ(t_arena **arena, int i, unsigned char *head, int bytes)
+t_champ	*create_champ(t_arena **arena, int i, unsigned char *head, int bytes)
 {
 	t_champ			*champ;
 	int				index;
@@ -95,7 +95,7 @@ t_champ		*create_champ(t_arena **arena, int i, unsigned char *head, int bytes)
 	return (champ);
 }
 
-void		add_to_champs(t_champ **champs, t_champ *champ)
+void	add_to_champs(t_champ **champs, t_champ *champ)
 {
 	if (!*champs)
 		*champs = champ;
@@ -106,7 +106,7 @@ void		add_to_champs(t_champ **champs, t_champ *champ)
 	}
 }
 
-void		read_champs(t_arena **arena)
+void	read_champs(t_arena **arena)
 {
 	int				i;
 	int				r;

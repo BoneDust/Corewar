@@ -6,7 +6,7 @@
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 10:52:56 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 12:28:59 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/10/01 15:09:04 by nrarane          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	process_instruction(t_champ *champ, t_arena **arena, t_func *f)
 			champ->pc++;
 		champ->wait = 0;
 	}
-	champ->pc %= MEM_SIZE;;
+	champ->pc %= MEM_SIZE;
 }
 
 void		fill_functions(t_func *f)
