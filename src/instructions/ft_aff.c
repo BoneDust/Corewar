@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count.c                                         :+:      :+:    :+:   */
+/*   ft_aff.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/23 04:26:26 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 04:39:57 by gtshekel         ###   ########.fr       */
+/*   Created: 2017/09/29 20:38:08 by gtshekel          #+#    #+#             */
+/*   Updated: 2017/10/01 13:54:07 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		count(char *s, char c)
-{
-	int counting;
-	int	index;
+#include "../../vm.h"
 
-	counting = 0;
-	index = 0;
-	while (s[index])
-	{
-		if (s[index] == c)
-			counting++;
-		index++;
-	}
-	return (counting);
+void	ft_aff(t_arena **arena, t_champ **champ)
+{
+	int				value[3];
+	int				bytes;
+	int				pc;
+
+	pc = ((*champ)->pc + 2) % MEM_SIZE;
+	value[0] = (*champ)->reg[get_a_value(1, pc, (*arena)->arena) - 1];
+	bytes = 3;
+	ft_putchar(value[0] % 256);
+	(*champ)->pc += bytes;
 }

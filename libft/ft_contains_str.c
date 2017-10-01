@@ -6,13 +6,13 @@
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/16 13:19:17 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/08/16 13:19:36 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/09/13 12:38:14 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_contains_str(const char **argv, const char *str, int len)
+int		ft_contains_str(char **argv, char *str, int len)
 {
 	int		index;
 

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count.c                                         :+:      :+:    :+:   */
+/*   ft_zjmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/23 04:26:26 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 04:39:57 by gtshekel         ###   ########.fr       */
+/*   Created: 2017/09/29 21:56:15 by gtshekel          #+#    #+#             */
+/*   Updated: 2017/10/01 13:45:40 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		count(char *s, char c)
-{
-	int counting;
-	int	index;
+#include "../../vm.h"
 
-	counting = 0;
-	index = 0;
-	while (s[index])
+void	ft_zjmp(t_arena **arena, t_champ **champ)
+{
+	int				value[3];
+	int				pc;
+
+	pc = ((*champ)->pc) % MEM_SIZE;
+	if (!(*champ)->carry)
+		(*champ)->pc++;
+	else
 	{
-		if (s[index] == c)
-			counting++;
-		index++;
+		value[0] = get_a_value(IND_SIZE, pc + 1, (*arena)->arena);
+		(*champ)->pc += (value[0] % IDX_MOD);
 	}
-	return (counting);
 }

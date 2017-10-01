@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count.c                                         :+:      :+:    :+:   */
+/*   ft_printhex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhanye <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/23 04:26:26 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 04:39:57 by gtshekel         ###   ########.fr       */
+/*   Created: 2017/05/30 11:05:35 by akhanye           #+#    #+#             */
+/*   Updated: 2017/10/01 04:41:51 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		count(char *s, char c)
-{
-	int counting;
-	int	index;
+#include "libft.h"
 
-	counting = 0;
-	index = 0;
-	while (s[index])
+void	ft_printhex(unsigned char num)
+{
+	char hex[16];
+
+	ft_bzero(hex, 16);
+	ft_strcat(hex, "0123456789abcdef");
+	if (num < 16)
+		ft_putchar(hex[num]);
+	else
 	{
-		if (s[index] == c)
-			counting++;
-		index++;
+		ft_printhex(num / 16);
+		ft_printhex(num % 16);
 	}
-	return (counting);
 }

@@ -6,7 +6,7 @@
 #    By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/02 19:50:44 by gtshekel          #+#    #+#              #
-#    Updated: 2017/09/23 04:42:24 by gtshekel         ###   ########.fr        #
+#    Updated: 2017/10/01 04:37:58 by gtshekel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = ft_atoi.c	ft_memalloc.c	ft_putchar.c	ft_strcat.c	ft_striter.c	ft_strncmp.c
 	ft_strcpy.c	ft_strlen.c	ft_strnstr.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstmap.c\
 	ft_lstiter.c ft_strcuthead.c ft_addnbr.c ft_abs.c get_next_line.c destroy_fd.c ft_is_number.c ft_contains.c\
 	ft_destroy_2d.c ft_htoi.c ft_items_in_grid.c ft_contains_str.c ft_out_of_int_range.c ft_replace.c\
-	ft_count.c
+	ft_alloc_grid.c ft_printhex.c ft_count.c
 
 OBJECTS = $(SRC:.c=.o)
 

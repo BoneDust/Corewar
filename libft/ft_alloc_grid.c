@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count.c                                         :+:      :+:    :+:   */
+/*   ft_alloc_grid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/23 04:26:26 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/10/01 04:39:57 by gtshekel         ###   ########.fr       */
+/*   Created: 2017/09/11 15:16:53 by gtshekel          #+#    #+#             */
+/*   Updated: 2017/09/22 10:38:41 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		count(char *s, char c)
-{
-	int counting;
-	int	index;
+#include "libft.h"
 
-	counting = 0;
+char		**ft_alloc_grid(size_t n)
+{
+	char	**grid;
+	int		index;
+
+	if (!(grid = (char**)malloc(sizeof(char*) * (n + 1))))
+		return (NULL);
 	index = 0;
-	while (s[index])
-	{
-		if (s[index] == c)
-			counting++;
-		index++;
-	}
-	return (counting);
+	while (index < n + 1)
+		grid[index++] = NULL;
+	return (grid);
 }

@@ -6,7 +6,7 @@
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 14:45:05 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/09/23 04:29:16 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/10/01 04:40:16 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 # define BUFF_SIZE 20
 
 typedef struct		s_list
@@ -32,9 +33,11 @@ typedef struct		s_fd
 }					t_fd;
 
 int					count(char *s, char c);
+void				ft_printhex(unsigned char num);
+char				**ft_alloc_grid(size_t n);
 int					ft_items_in_grid(void **grid);
 int					ft_contains(char *s, char c);
-int					ft_contains_str(const char **argv, const char *str, int l);
+int					ft_contains_str(char **argv, char *str, int l);
 int					ft_isalnum(int c);
 void				ft_bzero(void *s, size_t n);
 void				ft_replace(char **str, char a, char b);

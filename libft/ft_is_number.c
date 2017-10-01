@@ -6,7 +6,7 @@
 /*   By: gtshekel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/02 11:55:02 by gtshekel          #+#    #+#             */
-/*   Updated: 2017/09/23 12:37:31 by gtshekel         ###   ########.fr       */
+/*   Updated: 2017/09/10 08:40:23 by gtshekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		ft_is_number(char *s)
 {
 	int index;
 
+	if (!s || ft_strlen(s) == 0)
+		return (0);
 	index = 0;
 	if (s[index] == '+' || s[index] == '-')
 		index++;
